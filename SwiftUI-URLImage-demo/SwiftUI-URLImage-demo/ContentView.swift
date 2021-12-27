@@ -89,16 +89,34 @@ struct ContentView: View {
 //        }
 
         // 画像の拡大縮小（限度も調整できる）
-        URLImage(imageUrl) { image in
-            let magnification = Magnification(range: 1.0...4.0,
-                                              initialValue: 1.0,
-                                              isRelative: true) // ビューのフレームを基準にするか
-            AdvancedScrollView(magnification: magnification, isScrollIndicatorVisible: true) { _ in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            }
+//        URLImage(imageUrl) { image in
+//            let magnification = Magnification(range: 1.0...4.0,
+//                                              initialValue: 1.0,
+//                                              isRelative: true) // ビューのフレームを基準にするか
+//            AdvancedScrollView(magnification: magnification, isScrollIndicatorVisible: true) { _ in
+//                image
+//                    .resizable()
+//                    .aspectRatio(contentMode: .fit)
+//            }
 
+        // SwiftUIではデフォルトであった
+//        AsyncImage(url: imageUrl) { phase in
+//            if let image = phase.image {
+//                image
+//                    .resizable()
+//            } else if phase.error != nil {
+//                // TODO: エラー処理
+//            } else {
+//                // TODO: placeholder
+//            }
+//        }
+
+        // こんな書き方も
+        AsyncImage(url: imageUrl) { content in
+            content
+                .resizable()
+        } placeholder: {
+            // TODO: placeholder
         }
     }
 }
